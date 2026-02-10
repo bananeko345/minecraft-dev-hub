@@ -35,6 +35,7 @@ main {
   border-radius: 6px;
   font-weight: bold;
 }
+
 pre {
   background: #eee;
   padding: 10px;
@@ -67,15 +68,11 @@ ChestLock Addon は、Minecraft 統合版で使用できるチェスト保護用
 <h2>使い方</h2>
 
 <h3>ロック</h3>
-<pre>
-/function lock
-</pre>
+<pre>/function lock</pre>
 <p>上記コマンドを実行後、ロックしたいチェストをクリックしてください。</p>
 
 <h3>解除</h3>
-<pre>
-/function unlock
-</pre>
+<pre>/function unlock</pre>
 <p>上記コマンドを実行後、解除したいチェストをクリックしてください。</p>
 
 <p><strong>※ チートONのワールドで使用してください。</strong></p>
@@ -88,9 +85,28 @@ ChestLock Addon は、Minecraft 統合版で使用できるチェスト保護用
 
 <a class="button"
 href="https://bananeko345.github.io/minecraft-dev-hub/ChestLockAddon.mcaddon"
+onclick="countDownload()"
 download>
 ChestLockAddon.mcaddon をダウンロード
 </a>
+
+<h2>ダウンロード回数</h2>
+<p id="count">読み込み中...</p>
+
+<script>
+// ページを開いたときに回数を表示
+fetch("https://api.countapi.xyz/get/bananeko345/chestlock")
+.then(res => res.json())
+.then(data => {
+  document.getElementById("count").innerText =
+    "ダウンロード回数：約 " + data.value + " 回";
+});
+
+// ボタンが押されたときにカウント＋1
+function countDownload() {
+  fetch("https://api.countapi.xyz/hit/bananeko345/chestlock");
+}
+</script>
 
 <h2>注意事項</h2>
 <ul>
@@ -102,7 +118,9 @@ ChestLockAddon.mcaddon をダウンロード
 <h2>作者</h2>
 <p>ChestLock Addon 制作：bannaneko345</p>
 
-<p><a href="https://bananeko345.github.io/minecraft-dev-hub/">トップページに戻る</a></p>
+<p><a href="https://bananeko345.github.io/minecraft-dev-hub/">
+トップページに戻る
+</a></p>
 
 </main>
 
