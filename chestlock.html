@@ -40,6 +40,11 @@ pre {
   background: #eee;
   padding: 10px;
 }
+.count-box {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1e90ff;
+}
 </style>
 </head>
 
@@ -90,21 +95,31 @@ download>
 ChestLockAddon.mcaddon をダウンロード
 </a>
 
-<h2>ダウンロード回数</h2>
-<p id="count">読み込み中...</p>
+<h2>この端末のダウンロード回数</h2>
+<p class="count-box" id="count">計測中...</p>
 
 <script>
-// ページを開いたときに回数を表示
-fetch("https://api.countapi.xyz/get/bananeko345/chestlock")
-.then(res => res.json())
-.then(data => {
-  document.getElementById("count").innerText =
-    "ダウンロード回数：約 " + data.value + " 回";
-});
+// ----- 端末ごとのダウンロード回数（確実に動く方式） -----
 
-// ボタンが押されたときにカウント＋1
+// ① ページを開いたときに回数を表示
+let count = localStorage.getItem("chestlock_download");
+
+if (!count) {
+  count = 0;
+} else {
+  count = Number(count);
+}
+
+document.getElementById("count").innerText =
+  "あなたの端末でのダウンロード回数：" + count + " 回";
+
+// ② ボタンが押されたとき +1
 function countDownload() {
-  fetch("https://api.countapi.xyz/hit/bananeko345/chestlock");
+  count = count + 1;
+  localStorage.setItem("chestlock_download", count);
+
+  document.getElementById("count").innerText =
+    "あなたの端末でのダウンロード回数：" + count + " 回";
 }
 </script>
 
